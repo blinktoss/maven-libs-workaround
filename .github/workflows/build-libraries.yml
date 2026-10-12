@@ -1,0 +1,49 @@
+
+name: Build Shared Libraries Java 11
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build-libraries:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout workaround
+        uses: actions/checkout@v4
+
+      - name: Setup Java 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '11'
+          cache: maven
+
+      - name: Checkout Shared Model
+        uses: actions/checkout@v4
+        with:
+          repository: blinktoss/lib-shared-model-uch
+          path: libs/model
+          token: ${{ secrets.LIB_REPOS_TOKEN }}
+
+      - name: Checkout Shared State
+        uses: actions/checkout@v4
+        with:
+          repository: blinktoss/lib-shared-state-uch
+          path: libs/state
+          token: ${{ secrets.LIB_REPOS_TOKEN }}
+
+      - name: Install Shared Model
+        run: |
+          mvn -B -ntp -f libs/model/pom.xml \
+            clean install -DskipTests
+
+      - name: Install Shared State
+        run: |
+          mvn -B -ntp -f libs/state/pom.xml \
+            clean install -DskipTests
+
+      - name: Verify dependencies
+        run: mvn -B -ntp dependency:tree

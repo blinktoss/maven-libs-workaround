@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.uch</groupId>
+    <artifactId>maven-libs-workaround</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.release>11</maven.compiler.release>
+        <uch-shared-model.version>1.1.0</uch-shared-model.version>
+        <uch-shared-state.version>3.2.0</uch-shared-state.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.uch</groupId>
+            <artifactId>uch-shared-model</artifactId>
+            <version>${uch-shared-model.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.uch</groupId>
+            <artifactId>uch-shared-state</artifactId>
+            <version>${uch-shared-state.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
